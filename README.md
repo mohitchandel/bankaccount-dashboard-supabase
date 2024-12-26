@@ -53,3 +53,13 @@ npm run dev
 - balance: string
 - card: string
 - account_holder: string
+
+### Transactions Table
+
+- id: string (primary key)
+- bank_id: string (foreign key)
+- transaction_name: string
+- transaction_type: string
+- transaction_amount: string
+- transaction_date: string
+- description: string
