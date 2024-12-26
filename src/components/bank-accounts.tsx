@@ -1,4 +1,5 @@
 "use client";
+import { formatDollarValue } from "@/constants";
 import { supabase } from "@/lib/supabase";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -13,10 +14,14 @@ interface BankAccount {
   account_holder: string;
 }
 
-export const BankAccounts = () => {
+interface Props {
+  selectedBankId: string;
+  onSelectBank: (id: string) => void;
+}
+
+export const BankAccounts = ({ selectedBankId, onSelectBank }: Props) => {
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedBankId, setSelectedBankId] = useState<string>("");
 
   const fetchBankAccounts = async () => {
     setLoading(true);
@@ -28,7 +33,9 @@ export const BankAccounts = () => {
       }
       if (data && data.length > 0) {
         setBankAccounts(data);
-        setSelectedBankId(data[0].id);
+        if (!selectedBankId) {
+          onSelectBank(data[0].id);
+        }
       } else {
         setBankAccounts([]);
       }
@@ -38,14 +45,6 @@ export const BankAccounts = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const formatAccountNumber = (value: string): string => {
-    const numericValue = parseFloat(value);
-    if (isNaN(numericValue)) {
-      return "Invalid number";
-    }
-    return numericValue.toLocaleString("en-US");
   };
 
   const formatedCardNumber = (value: string) => {
@@ -85,7 +84,7 @@ export const BankAccounts = () => {
                   ? "bg-primary/5 border-primary"
                   : "bg-white border-gray-200"
               } cursor-pointer`}
-              onClick={() => setSelectedBankId(account.id)}
+              onClick={() => onSelectBank(account.id)}
             >
               <div className="text-sm text-gray-600">
                 {account.bank} ({account.account_number})
@@ -103,7 +102,7 @@ export const BankAccounts = () => {
               <div className="mt-4">
                 <div className="text-sm text-gray-500">Balance</div>
                 <div className="text-xl font-semibold">
-                  ${formatAccountNumber(account.balance)}
+                  ${formatDollarValue(account.balance)}
                 </div>
               </div>
             </div>
