@@ -28,12 +28,12 @@ export const AccountTransactions = ({
   selectedBankId,
 }: AccountTransactionsProps) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activityType, setActivityType] = useState("all");
-  const [transactionType, setTransactionType] = useState("all");
-  const [dateRange, setDateRange] = useState("all");
-  const [bankBalance, setBankBalance] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [activityType, setActivityType] = useState<string>("all");
+  const [transactionType, setTransactionType] = useState<string>("all");
+  const [dateRange, setDateRange] = useState<string>("all");
+  const [bankBalance, setBankBalance] = useState<string>("");
 
   const fetchTransactions = async () => {
     if (!selectedBankId) return;
