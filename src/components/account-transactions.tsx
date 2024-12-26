@@ -14,7 +14,6 @@ interface Transaction {
   transaction_date: string;
   description: string;
 }
-
 interface AccountTransactionsProps {
   selectedBankId: string;
 }

@@ -14,7 +14,7 @@ export default function Home() {
             your finances and track your transactions with ease.
           </p>
 
-          <div className="bg-white shadow-md rounded-lg p-6 mb-8 text-center">
+          <div className="bg-gray-100 shadow-md rounded-lg p-6 mb-8 text-center">
             <h2 className="text-2xl font-semibold mb-4">Key Features:</h2>
             <ul className="list-inside space-y-2 list-none">
               <li>View balances across your multiple bank accounts</li>
