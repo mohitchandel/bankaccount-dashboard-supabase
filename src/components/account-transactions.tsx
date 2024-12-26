@@ -46,7 +46,11 @@ export const AccountTransactions = ({
 
       if (error) console.error(error);
 
-      setTransactions(data || []);
+      if (data && data.length > 0) {
+        setTransactions(data);
+      } else {
+        setTransactions([]);
+      }
     } catch (err: any) {
       toast.error(err.message || "Failed to get transaction");
       console.error(err);

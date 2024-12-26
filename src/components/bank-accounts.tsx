@@ -28,9 +28,8 @@ export const BankAccounts = ({ selectedBankId, onSelectBank }: Props) => {
     try {
       const { data, error } = await supabase.from("bank_accounts").select("*");
 
-      if (error) {
-        throw error;
-      }
+      if (error) console.error(error);
+
       if (data && data.length > 0) {
         setBankAccounts(data);
         if (!selectedBankId) {
